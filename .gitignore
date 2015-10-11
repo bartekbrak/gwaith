@@ -1,0 +1,17 @@
+# Python compiled files.
+*py[cod]
+
+# setuptools
+/*.egg-info
+/dist
+/build
+
+# pytest cache
+/.cache
+
+# pyenv virtualenv configuration
+/.python-version
+
+# IDE files
+/.idea
+

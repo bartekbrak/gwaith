@@ -1,0 +1,4 @@
+# more on syntax: https://docs.python.org/2/distutils/sourcedist.html#commands
+# note that this will not include them into wheel
+include LICENSE
+include README.md

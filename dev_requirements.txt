@@ -1,0 +1,5 @@
+# test and development requirements
+pytest==2.8.2
+ipdb
+pytest-flakes
+isort
