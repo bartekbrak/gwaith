@@ -66,19 +66,25 @@ API.</p>
 <h1>
 <a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h1>
 
+<p><img class="emoji" title=":exclamation:" alt=":exclamation:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png" height="20" width="20" align="absmiddle"> The <code>processors</code> <a href="https://pythonhosted.org/setuptools/setuptools.html#declaring-extras-optional-features-with-their-own-dependencies">extra</a> installs dependencies needed by the
+<code>raw_python</code> processor, only install if you plan to use this processor. This is
+ to limit number of dependencies (by half <img class="emoji" title=":metal:" alt=":metal:" src="https://assets-cdn.github.com/images/icons/emoji/metal.png" height="20" width="20" align="absmiddle">).</p>
+
 <h2>
 <a id="in-production" class="anchor" href="#in-production" aria-hidden="true"><span class="octicon octicon-link"></span></a>In production</h2>
 
 <p>From GitHub only, there are no plans to release it to PyPi.</p>
 
-<div class="highlight highlight-source-shell"><pre>pip install git+ssh://git@github.com/bartekbrak/gwaith.git</pre></div>
+<div class="highlight highlight-source-shell"><pre>pip install git+ssh://git@github.com/bartekbrak/gwaith.git
+pip install git+ssh://git@github.com/bartekbrak/gwaith.git#egg=gwaith[processors]</pre></div>
 
-<h1>
-<a id="for-development" class="anchor" href="#for-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>For development</h1>
+<h2>
+<a id="for-development" class="anchor" href="#for-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>For development</h2>
 
 <div class="highlight highlight-source-shell"><pre>git clone git@github.com:bartekbrak/gwaith.git
 <span class="pl-c1">cd</span> gwaith
-pip install -e <span class="pl-c1">.</span> -r dev_requirements.txt</pre></div>
+pip install -e <span class="pl-c1">.</span> -r dev_requirements.txt
+pip install -e[processors] <span class="pl-c1">.</span> -r dev_requirements.txt</pre></div>
 
 <h1>
 <a id="run-tests" class="anchor" href="#run-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run tests</h1>
@@ -92,12 +98,12 @@ py.<span class="pl-c1">test</span> -m <span class="pl-s"><span class="pl-pds">'<
 <h1>
 <a id="known-issues" class="anchor" href="#known-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Known issues:</h1>
 
-<p>The library makes a few assumtions about the data that ECB provides 
+<p>The library makes a few assumtions about the data that ECB provides
 that might not hold and would require extra live testing:</p>
 
 <ul>
-<li>Currency feeds provide rates on distinct dates, if this 
-breaks and two identical dates are provided, the earlier will be forgotten </li>
+<li>Currency feeds provide rates on distinct dates, if this
+breaks and two identical dates are provided, the earlier will be forgotten</li>
 <li>The CSV processor creates a generator, this for the sake of the API cosistency
 but this processor does not return anything, it writes directly to the object
 provided, be it stdout or file, this might be surprising to the end user</li>
