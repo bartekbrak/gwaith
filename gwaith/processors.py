@@ -5,8 +5,6 @@ import csv
 import json
 import sys
 
-import dateutil.parser
-
 
 def to_json(currency, rates):
     return json.dumps({currency: rates})
@@ -22,6 +20,7 @@ def raw(currency, rates):
 
 
 def raw_python(currency, rates):
+    import dateutil.parser
     return currency, {
         dateutil.parser.parse(date): rate
         for date, rate in rates.items()

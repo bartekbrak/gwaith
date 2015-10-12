@@ -4,6 +4,9 @@ import json
 import sys
 from collections import OrderedDict
 
+import pip
+import pytest
+
 from gwaith.processors import raw, raw_python, to_csv, to_json
 
 currency = 'GBP'
@@ -43,6 +46,11 @@ def test_raw():
     assert result_rates == rates
 
 
+@pytest.mark.skipif(
+    'python-dateutil' not in
+    [_.key for _ in pip.get_installed_distributions()],
+    reason='requires python-dateutil'
+)
 def test_raw_python():
     result_currency, result_rates = raw_python(currency, rates)
     assert result_currency == currency
