@@ -8,6 +8,9 @@ setup(
     version='2015.10.12.0',
     install_requires=[
         'feedparser==5.2.1',
-        'python-dateutil==2.4.2'
+
     ],
+    extras_require={
+        'processors': ['python-dateutil==2.4.2']
+    }
 )

@@ -34,21 +34,28 @@ API.
 
 # Install
 
+:exclamation: The `processors` [extra](https://pythonhosted.org/setuptools/setuptools.html#declaring-extras-optional-features-with-their-own-dependencies) installs dependencies needed by the
+`raw_python` processor, only install if you plan to use this processor. This is
+ to limit number of dependencies (by half :metal:).
+
 ## In production
 
 From GitHub only, there are no plans to release it to PyPi.
 
 ```bash
 pip install git+ssh://git@github.com/bartekbrak/gwaith.git
+pip install git+ssh://git@github.com/bartekbrak/gwaith.git#egg=gwaith[processors]
 ```
 
-# For development
+## For development
 
 ```bash
 git clone git@github.com:bartekbrak/gwaith.git
 cd gwaith
 pip install -e . -r dev_requirements.txt
+pip install -e[processors] . -r dev_requirements.txt
 ```
+
 
 # Run tests
 
@@ -61,11 +68,11 @@ py.test -m 'online'
 ```
 
 # Known issues:
-The library makes a few assumtions about the data that ECB provides 
+The library makes a few assumtions about the data that ECB provides
 that might not hold and would require extra live testing:
 
-- Currency feeds provide rates on distinct dates, if this 
-  breaks and two identical dates are provided, the earlier will be forgotten 
+- Currency feeds provide rates on distinct dates, if this
+  breaks and two identical dates are provided, the earlier will be forgotten
 - The CSV processor creates a generator, this for the sake of the API cosistency
   but this processor does not return anything, it writes directly to the object
   provided, be it stdout or file, this might be surprising to the end user
