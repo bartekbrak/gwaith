@@ -60,6 +60,16 @@ py.test -m 'online'
 # also have a look in setup.cfg to learn the hardcoded py.test args
 ```
 
+# Known issues:
+The library makes a few assumtions about the data that ECB provides 
+that might not hold and would require extra live testing:
+
+- Currency feeds provide rates on distinct dates, if this 
+  breaks and two identical dates are provided, the earlier will be forgotten 
+- The CSV processor creates a generator, this for the sake of the API cosistency
+  but this processor does not return anything, it writes directly to the object
+  provided, be it stdout or file, this might be surprising to the end user
+
 # Contributing
 
 I do not plan to expand the library, so fork the code and treat as your own.
