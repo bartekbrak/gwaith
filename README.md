@@ -71,11 +71,19 @@ py.test -m 'online'
 The library makes a few assumtions about the data that ECB provides
 that might not hold and would require extra live testing:
 
+- The library does not allow controlling how many days back should be taken
+  into account
 - Currency feeds provide rates on distinct dates, if this
   breaks and two identical dates are provided, the earlier will be forgotten
-- The CSV processor creates a generator, this for the sake of the API cosistency
-  but this processor does not return anything, it writes directly to the object
-  provided, be it stdout or file, this might be surprising to the end user
+- The CSV processor creates a generator, this for the sake of the API
+  consistency but this processor does not return anything, it writes directly
+  to the object provided, be it stdout or file, this might be surprising to
+  the end user
+
+# TODO
+
+- Allow limiting days back that rates are collected from, currently at whatever
+  RSS gives, as of time of writing, five working days
 
 # Contributing
 
