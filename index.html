@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Gwaith by bartekbrak</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Gwaith</h1>
+        <p>A standalone library to download European Central Bank foreign exchange reference rates. demo code.</p>
+
+        <p class="view"><a href="https://github.com/bartekbrak/gwaith">View the Project on GitHub <small>bartekbrak/gwaith</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bartekbrak/gwaith/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bartekbrak/gwaith/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bartekbrak/gwaith">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="gwaith" class="anchor" href="#gwaith" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gwaith</h1>
+
+<p>A standalone library to download European Central Bank foreign exchange
+reference rates.</p>
+
+<p>This library was written as a showcase piece of code for a prospective
+employer. It is not intended to be used in production environment, however,
+it may work. Use at your own discretion. Due to the nature of the motivation
+for writing this library it is at times arguably over-complicated and against
+YAGNI principle. No Python Zen monks were actually harmed in the process.</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> gwaith <span class="pl-k">import</span> get_rates
+
+<span class="pl-k">for</span> rates <span class="pl-k">in</span> get_rates():
+    <span class="pl-k">print</span>(rates)
+
+<span class="pl-c"># or</span>
+only <span class="pl-k">=</span> (<span class="pl-s"><span class="pl-pds">'</span>PLN<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>GBP<span class="pl-pds">'</span></span>)
+<span class="pl-k">for</span> data <span class="pl-k">in</span> get_rates(<span class="pl-smi">processor</span><span class="pl-k">=</span>processors.to_json, <span class="pl-smi">only</span><span class="pl-k">=</span>only):
+    <span class="pl-k">print</span>(data)
+
+<span class="pl-c"># or see bin/hand_test_lib_main.py for usage examples</span>
+</pre></div>
+
+<h2>
+<a id="processors" class="anchor" href="#processors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Processors</h2>
+
+<p>Tiny functions allowing you to return the data in some common formats. Feel
+free to write your own. Have a look at <code>gwaith.processors</code> to understand the
+API.</p>
+
+<h1>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h1>
+
+<h2>
+<a id="in-production" class="anchor" href="#in-production" aria-hidden="true"><span class="octicon octicon-link"></span></a>In production</h2>
+
+<p>From GitHub only, there are no plans to release it to PyPi.</p>
+
+<div class="highlight highlight-source-shell"><pre>pip install git+ssh://git@github.com/bartekbrak/gwaith.git</pre></div>
+
+<h1>
+<a id="for-development" class="anchor" href="#for-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>For development</h1>
+
+<div class="highlight highlight-source-shell"><pre>git clone git@github.com:bartekbrak/gwaith.git
+<span class="pl-c1">cd</span> gwaith
+pip install -e <span class="pl-c1">.</span> -r dev_requirements.txt</pre></div>
+
+<h1>
+<a id="run-tests" class="anchor" href="#run-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run tests</h1>
+
+<div class="highlight highlight-source-shell"><pre>pip install -r dev_requirements.txt
+py.<span class="pl-c1">test</span>
+<span class="pl-c"># run tests connecting to the Internet</span>
+py.<span class="pl-c1">test</span> -m <span class="pl-s"><span class="pl-pds">'</span>online<span class="pl-pds">'</span></span>
+<span class="pl-c"># also have a look in setup.cfg to learn the hardcoded py.test args</span></pre></div>
+
+<h1>
+<a id="known-issues" class="anchor" href="#known-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Known issues:</h1>
+
+<p>The library makes a few assumtions about the data that ECB provides 
+that might not hold and would require extra live testing:</p>
+
+<ul>
+<li>Currency feeds provide rates on distinct dates, if this 
+breaks and two identical dates are provided, the earlier will be forgotten </li>
+<li>The CSV processor creates a generator, this for the sake of the API cosistency
+but this processor does not return anything, it writes directly to the object
+provided, be it stdout or file, this might be surprising to the end user</li>
+</ul>
+
+<h1>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>I do not plan to expand the library, so fork the code and treat as your own.</p>
+
+<h1>
+<a id="code-structore" class="anchor" href="#code-structore" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code structore</h1>
+
+<p><code>gwaith</code> contains the library, <code>bin</code> convenience shell scripts.</p>
+
+<h1>
+<a id="licence" class="anchor" href="#licence" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licence</h1>
+
+<p>Released under MIT License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bartekbrak">bartekbrak</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
