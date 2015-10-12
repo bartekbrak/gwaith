@@ -5,15 +5,32 @@ reference rates.
 
 This library was written as a showcase piece of code for a prospective
 employer. It is not intended to be used in production environment, however,
-it may work. Use at your own discretion.
+it may work. Use at your own discretion. Due to the nature of the motivation
+for writing this library it is at times arguably over-complicated and against
+YAGNI principle. No Python Zen monks were actually harmed in the process.
 
 # Usage
 
 ```python
-from gwaith import ECBDownloader
+from gwaith import get_rates
 
-rates = ECBDownloader().download()
+for rates in get_rates():
+    print(rates)
+
+# or
+only = ('PLN', 'GBP')
+for data in get_rates(processor=processors.to_json, only=only):
+    print(data)
+
+# or see bin/hand_test_lib_main.py for usage examples
+
 ```
+
+## Processors
+
+Tiny functions allowing you to return the data in some common formats. Feel
+free to write your own. Have a look at `gwaith.processors` to understand the
+API.
 
 # Install
 
@@ -38,6 +55,9 @@ pip install -e . -r dev_requirements.txt
 ```bash
 pip install -r dev_requirements.txt
 py.test
+# run tests connecting to the Internet
+py.test -m 'online'
+# also have a look in setup.cfg to learn the hardcoded py.test args
 ```
 
 # Contributing

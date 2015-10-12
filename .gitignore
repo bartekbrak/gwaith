@@ -6,8 +6,9 @@
 /dist
 /build
 
-# pytest cache
+# pytest 
 /.cache
+/.coverage
 
 # pyenv virtualenv configuration
 /.python-version
