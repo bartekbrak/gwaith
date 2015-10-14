@@ -5,7 +5,7 @@ setup(
     description='a standalone library to download European Central Bank '
                 'foreign exchange reference rates',
     packages=find_packages(include=('gwaith*',)),
-    version='2015.10.12.6',
+    version='2015.10.13.0',
     author='Bartek Brak',
     author_email='bartek.rychlicki@gmail.com',
     install_requires=[

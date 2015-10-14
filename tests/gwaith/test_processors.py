@@ -3,6 +3,7 @@ import datetime
 import json
 import sys
 from collections import OrderedDict
+from decimal import Decimal
 
 import pip
 import pytest
@@ -12,17 +13,17 @@ from gwaith.processors import raw, raw_python, to_csv, to_json
 currency = 'GBP'
 # makes testing hardcoded output predictable, easier
 rates = OrderedDict([
-    ('2015-10-06T14:15:00+01:00', 0.7399),
-    ('2015-10-07T14:15:00+01:00', 0.7358),
-    ('2015-10-09T14:15:00+01:00', 0.7407),
-    ('2015-10-12T14:15:00+01:00', 0.7401),
-    ('2015-10-08T14:15:00+01:00', 0.7366),
+    ('2015-10-06T14:15:00+01:00', Decimal('0.7399')),
+    ('2015-10-07T14:15:00+01:00', Decimal('0.7358')),
+    ('2015-10-09T14:15:00+01:00', Decimal('0.7407')),
+    ('2015-10-12T14:15:00+01:00', Decimal('0.7401')),
+    ('2015-10-08T14:15:00+01:00', Decimal('0.7366')),
 ])
 
 
 def test_to_json():
     result = json.loads(to_json(currency, rates))
-    expected = {currency: rates}
+    expected = {currency: {date: str(rate) for date, rate in rates.items()}}
     assert result == expected
 
 
@@ -56,4 +57,4 @@ def test_raw_python():
     assert result_currency == currency
     for date, rate in result_rates.items():
         assert isinstance(date, datetime.datetime)
-        assert isinstance(rate, float)
+        assert isinstance(rate, Decimal)

@@ -7,7 +7,8 @@ import sys
 
 
 def to_json(currency, rates):
-    return json.dumps({currency: rates})
+    serializable = {date: str(rate) for date, rate in rates.items()}
+    return json.dumps({currency: serializable})
 
 
 def to_csv(currency, rates, writer=csv.writer(sys.stdout)):

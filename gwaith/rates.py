@@ -1,6 +1,8 @@
 """
 Handler for getting rates from a single rss url and its helper funcitons.
 """
+from decimal import Decimal
+
 import feedparser
 
 
@@ -18,12 +20,12 @@ def _get_feed_entries(url):
 
 def _get_rate_value(raw_rate):
     """
-    Extract float rate value from a format like this '1.5853\nEUR'.
+    Extract Decimal rate value from a format like this '1.5853\nEUR'.
 
     :param raw_rate: str
-    :return: float
+    :return: Decimal
     """
-    return float(raw_rate.split('\n')[0])
+    return Decimal(raw_rate.split('\n')[0])
 
 
 def _get_rates(feed_entries):

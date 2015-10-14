@@ -1,3 +1,4 @@
+from decimal import Decimal
 from unittest.mock import patch
 
 import pytest
@@ -32,7 +33,7 @@ def test_get_feed_entries_offline():
 
 
 def test_get_rate_value():
-    assert _get_rate_value('1.5853\nEUR') == 1.5853
+    assert _get_rate_value('1.5853\nEUR') == Decimal('1.5853')
 
 
 def test__get_rates():
@@ -50,7 +51,7 @@ def test__get_rates():
     ]
     rates = _get_rates(entries_part)
     assert set([e['updated'] for e in entries_part]) == set(rates.keys())
-    assert all(isinstance(item, float) for item in rates.values())
+    assert all(isinstance(item, Decimal) for item in rates.values())
 
 
 @patch('gwaith.rates._get_feed_entries')
